@@ -13,6 +13,7 @@ export default function AppRouter() {
       {/* <Route element={<Layout />}> */}
       <Route
         path="/"
+        exact 
         element={
           <RequireAuth>
             {" "}
@@ -20,10 +21,11 @@ export default function AppRouter() {
           </RequireAuth>
         }
       />
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
+      <Route path="/login" exact element={<Login />} />
+      <Route path="/signup" exact element={<Signup />} />
       <Route
         path="/bugs"
+        exact 
         element={
           <RequireAuth>
             <Bugs />
@@ -32,6 +34,7 @@ export default function AppRouter() {
       />
       <Route
         path="/tutor"
+        exact 
         element={
           <RequireAuth>
             <Tutor />

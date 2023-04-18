@@ -5,6 +5,12 @@ import { useAuth } from "../contexts/AuthContext";
 export default function Navbar() {
   let auth = useAuth();
   console.log(auth);
+  const logout = () => {
+    if (auth && auth.user && sessionStorage.hasOwnProperty("token")) {
+      sessionStorage.clear();
+      auth.setCurrentUser(null);
+    }
+  };
   return (
     <ul className="nav justify-content-end">
       <li className="nav-item">
@@ -25,10 +31,17 @@ export default function Navbar() {
 
       <li className="nav-item">
         <span className="nav-link active" aria-current="page">
-          <Link to="/login"> {!auth.user ? "Login" : "Logout"} </Link>
+          <Link to="/login">
+            {" "}
+            {!auth.user ? (
+              <span>Login</span>
+            ) : (
+              <span onClick={logout}>Logout</span>
+            )}{" "}
+          </Link>
         </span>
       </li>
-      { auth && auth.user && auth.user.credits && (
+      {auth && auth.user && auth.user.credits && (
         <li className="nav-item">
           <span className="nav-link disabled">{auth.user?.credits}coins</span>
         </li>

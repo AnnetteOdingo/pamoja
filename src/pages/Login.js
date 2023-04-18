@@ -6,6 +6,7 @@ import {
   Button,
   InputRightElement,
   InputGroup,
+  Spinner
 } from "@chakra-ui/react";
 import React, { useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
@@ -16,9 +17,10 @@ import { useAuth } from "../contexts/AuthContext";
 
 export default function LoginPage() {
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const base_url = "https://pamoja-backend.onrender.com/api";
   const { getUserProfile } = useAuth();
-  
+
   const emailRef = useRef();
   const passwordRef = useRef();
   const navigate = useNavigate();
@@ -26,24 +28,30 @@ export default function LoginPage() {
     e.preventDefault();
     setPasswordVisible((prevState) => !prevState);
   };
-  const submit = () => {
+  const submit = (event) => {
+    event.preventDefault();
     axios
       .post(`${base_url}/users/login`, {
         email: emailRef.current.value,
         password: passwordRef.current.value,
       })
       .then((res) => {
+        setIsLoading(true)
         if (res.data.token) {
           sessionStorage.setItem("token", res.data.token);
         }
-        getUserProfile()
-        navigate("/");
+        getUserProfile();
       })
       .catch((error) => {
         alert(error.message);
       });
-    emailRef.current.value = "";
-    passwordRef.current.value = "";
+    setTimeout(() => {
+      navigate("/");
+
+      emailRef.current.value = "";
+      passwordRef.current.value = "";
+      setIsLoading(false)
+    }, 2000);
   };
   return (
     <Flex
@@ -123,8 +131,10 @@ export default function LoginPage() {
             onClick={submit}
             _hover={{ background: "#3182CE" }}
             _active={{ background: "#3182CE" }}
+
           >
-            LOGIN
+            {isLoading ? <span> <Spinner /> LOGIN</span>: "LOGIN"}
+            
           </Button>
           <Text>
             Don't have an account? <Link to="/signup">Signup</Link>
