@@ -17,7 +17,7 @@ import { useAuth } from "../contexts/AuthContext";
 export default function SignUpPage() {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { getUserProfile, user } = useAuth();
+  const { getUserProfile } = useAuth();
   const base_url = "https://pamoja-backend.onrender.com/api";
   const nameRef = useRef();
   const emailRef = useRef();

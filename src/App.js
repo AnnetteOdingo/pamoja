@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import { AuthProvider } from "./contexts/AuthContext";
-import Books from "./pages/Books";
+
 import AppRouter from "./routes/AppRouter";
 
 function App() {

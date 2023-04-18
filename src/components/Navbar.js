@@ -4,7 +4,6 @@ import { useAuth } from "../contexts/AuthContext";
 
 export default function Navbar() {
   let auth = useAuth();
-  console.log(auth);
   const logout = () => {
     if (auth && auth.user && sessionStorage.hasOwnProperty("token")) {
       sessionStorage.clear();

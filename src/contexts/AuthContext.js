@@ -22,31 +22,30 @@ export function AuthProvider({ children }) {
       id: `${userDTO.id}`,
     });
   };
-  const getUserProfile = async () => {
-    await axios()
-      .get(`${base_url}/users/info`)
-      .then((res) => {
-        setCurrentUser({
-          ...res.data,
-          name: res.data.name,
-          email: res.data.email,
-          id: res.data.id,
-          credits: res.data.credits,
-        });
-      })
-      .catch((error) => {
-        alert(error.response.data.message);
-      });
-  };
+  const value = React.useMemo(() => {
+    const getUserProfile = async () => {
+        await axios()
+          .get(`${base_url}/users/info`)
+          .then((res) => {
+            setCurrentUser({
+              ...res.data,
+              name: res.data.name,
+              email: res.data.email,
+              id: res.data.id,
+              credits: res.data.credits,
+            });
+          })
+          .catch((error) => {
+            alert(error.response.data.message);
+          });
+      };
 
-  const value = React.useMemo(
-    () => ({
-      user,
-      getUserProfile,
-      setCurrentUser,
-    }),
-    [user]
-  );
+    return {
+        user,
+        getUserProfile,
+        setCurrentUser,
+      }
+  }, [user]);
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 export function useAuth() {
