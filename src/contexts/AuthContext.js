@@ -24,27 +24,27 @@ export function AuthProvider({ children }) {
   };
   const value = React.useMemo(() => {
     const getUserProfile = async () => {
-        await axios()
-          .get(`${base_url}/users/info`)
-          .then((res) => {
-            setCurrentUser({
-              ...res.data,
-              name: res.data.name,
-              email: res.data.email,
-              id: res.data.id,
-              credits: res.data.credits,
-            });
-          })
-          .catch((error) => {
-            alert(error.response.data.message);
+      await axios()
+        .get(`${base_url}/users/info`)
+        .then((res) => {
+          setCurrentUser({
+            ...res.data,
+            name: res.data.name,
+            email: res.data.email,
+            id: res.data.id,
+            credits: res.data.credits,
           });
-      };
+        })
+        .catch((error) => {
+          alert(error.response.data.message);
+        });
+    };
 
     return {
-        user,
-        getUserProfile,
-        setCurrentUser,
-      }
+      user,
+      getUserProfile,
+      setCurrentUser,
+    };
   }, [user]);
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
@@ -52,13 +52,13 @@ export function useAuth() {
   return React.useContext(AuthContext);
 }
 export function RequireAuth({ children }) {
-    let auth = useAuth();
-    let location = useLocation();
-  
-    if (!auth.user) {
-      
-      return <Navigate to="/login" state={{ from: location }} replace />;
-    }
-  
+  let auth = useAuth();
+  let location = useLocation();
+  if (sessionStorage.getItem("token")) {
+    auth.getUserProfile();
+  }
+  if (auth.user || sessionStorage.getItem("token")) {
     return children;
   }
+  return <Navigate to="/login" state={{ from: location }} replace />;
+}
