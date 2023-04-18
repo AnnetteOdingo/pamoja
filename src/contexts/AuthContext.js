@@ -4,7 +4,7 @@ import axios from "../axios";
 
 let AuthContext = React.createContext(null);
 
-const base_url = "https://pamoja-backend.onrender.com/api/";
+const base_url = "https://pamoja-backend.onrender.com/api";
 
 export function AuthProvider({ children }) {
   let [user, setUser] = React.useState(null);
@@ -18,17 +18,20 @@ export function AuthProvider({ children }) {
       ...userDTO,
       name: `${userDTO.name}`,
       credits: `${userDTO.credits}`,
+      email: `${userDTO.email}`,
+      id: `${userDTO.id}`,
     });
   };
   const getUserProfile = async () => {
     await axios()
-      .get(`${base_url}users/info`)
+      .get(`${base_url}/users/info`)
       .then((res) => {
         setCurrentUser({
           ...res.data,
           name: res.data.name,
-          emai: res.data.email,
+          email: res.data.email,
           id: res.data.id,
+          credits: res.data.credits,
         });
       })
       .catch((error) => {

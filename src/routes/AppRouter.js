@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { RequireAuth } from "../contexts/AuthContext";
 import Books from "../pages/Books";
 import Bugs from "../pages/Bugs";
+import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import Tutor from "../pages/Tutor";
 
@@ -19,7 +20,8 @@ export default function AppRouter() {
           </RequireAuth>
         }
       />
-      <Route path="/login" element={<Signup />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
       <Route
         path="/bugs"
         element={

@@ -4,33 +4,35 @@ import { useAuth } from "../contexts/AuthContext";
 
 export default function Navbar() {
   let auth = useAuth();
-
+  console.log(auth);
   return (
-
     <ul className="nav justify-content-end">
       <li className="nav-item">
         <span className="nav-link">
-        <Link to="/"> Books </Link>
+          <Link to="/"> Books </Link>
         </span>
       </li>
       <li className="nav-item">
         <span className="nav-link">
-        <Link to="/bugs"> Bugs </Link>
+          <Link to="/bugs"> Bugs </Link>
         </span>
       </li>
       <li className="nav-item">
         <span className="nav-link">
-        <Link to="/tutor">Tutor </Link></span>
+          <Link to="/tutor">Tutor </Link>
+        </span>
       </li>
 
       <li className="nav-item">
-        <span className="nav-link active" aria-current="page" >
-        <Link to="/login"> {!auth.user ? "Login" : "Logout"} </Link>
+        <span className="nav-link active" aria-current="page">
+          <Link to="/login"> {!auth.user ? "Login" : "Logout"} </Link>
         </span>
       </li>
-      <li className="nav-item">
-        <span className="nav-link disabled"> 100 coins</span>
-      </li>
+      { auth && auth.user && auth.user.credits && (
+        <li className="nav-item">
+          <span className="nav-link disabled">{auth.user?.credits}coins</span>
+        </li>
+      )}
     </ul>
   );
 }
