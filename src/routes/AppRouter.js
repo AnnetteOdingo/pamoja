@@ -10,7 +10,6 @@ import Tutor from "../pages/Tutor";
 export default function AppRouter() {
   return (
     <Routes>
-      {/* <Route element={<Layout />}> */}
       <Route
         path="/"
         exact 

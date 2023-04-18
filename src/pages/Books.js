@@ -1,6 +1,7 @@
-import React from 'react';
-export default function Books(){
-    return(<div>
-        Books
-    </div>)
+import { Box } from "@chakra-ui/react";
+import React from "react";
+import Book from "../components/Book";
+
+export default function Books() {
+  return <Box><Book/></Box>;
 }
