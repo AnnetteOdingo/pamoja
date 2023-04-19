@@ -56,6 +56,7 @@ export default function Lesson() {
           _active={{ textDecoration: "underline" }}
           textDecoration="none"
           marginTop={"8px"}
+          paddingLeft='16px'
         >
           {!showComments ? "Chat" : "Close"}
         </Text>
