@@ -2,12 +2,10 @@ import {
   Box,
   Image,
   Flex,
-  Heading,
   Text,
   Button,
   Wrap,
   WrapItem,
-  Badge,
 } from "@chakra-ui/react";
 import React from "react";
 import Comments from "../shared/Comments";
@@ -203,6 +201,7 @@ export default function Book() {
               "the book is new",
               "the book is new",
             ]}
+            comment={'comment'}
           />
           <Flex justifyContent={"flex-end"} mt="8px">
             {" "}
@@ -217,7 +216,7 @@ export default function Book() {
           </Flex>
         </Box>
       ) : (
-        <Flex justifyContent={"flex-end"}>
+        <Flex justifyContent={"flex-end"} mt='16px'>
           {" "}
           <Text
             onClick={() => setShowComments(!showComments)}

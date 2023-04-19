@@ -4,7 +4,7 @@ import Book from "../components/Book";
 
 export default function Books() {
   return (
-    <Box>
+    <Box maxWidth={"1200px"} margin='0 auto'>
       <Book />
       <Book />
     </Box>

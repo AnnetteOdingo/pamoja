@@ -42,6 +42,8 @@ header ul li .credits{
   background-color: #fff;
   color: gold;
 }
-
+.borderBottom:last-child {
+  border-bottom: none; /* remove the border from the last box */
+}
 
 

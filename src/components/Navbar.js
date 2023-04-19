@@ -43,7 +43,7 @@ export default function Navbar() {
         </li>
         {auth && auth.user && auth.user.credits && (
           <li className="nav-item">
-            <span className="nav-link disabled credits">{auth.user?.credits}coins</span>
+            <span className="nav-link disabled credits">{auth.user?.credits}credits</span>
           </li>
         )}
       </ul>
