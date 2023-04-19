@@ -3,5 +3,10 @@ import React from "react";
 import Book from "../components/Book";
 
 export default function Books() {
-  return <Box><Book/></Box>;
+  return (
+    <Box>
+      <Book />
+      <Book />
+    </Box>
+  );
 }

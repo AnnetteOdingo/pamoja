@@ -11,40 +11,42 @@ export default function Navbar() {
     }
   };
   return (
-    <ul className="nav justify-content-end">
-      <li className="nav-item">
-        <span className="nav-link">
-          <Link to="/"> Books </Link>
-        </span>
-      </li>
-      <li className="nav-item">
-        <span className="nav-link">
-          <Link to="/bugs"> Bugs </Link>
-        </span>
-      </li>
-      <li className="nav-item">
-        <span className="nav-link">
-          <Link to="/tutor">Tutor </Link>
-        </span>
-      </li>
-
-      <li className="nav-item">
-        <span className="nav-link active" aria-current="page">
-          <Link to="/login">
-            {" "}
-            {!auth.user ? (
-              <span>Login</span>
-            ) : (
-              <span onClick={logout}>Logout</span>
-            )}{" "}
-          </Link>
-        </span>
-      </li>
-      {auth && auth.user && auth.user.credits && (
+    <header>
+      <ul className="nav justify-content-end">
         <li className="nav-item">
-          <span className="nav-link disabled">{auth.user?.credits}coins</span>
+          <span className="nav-link">
+            <Link to="/"> Books </Link>
+          </span>
         </li>
-      )}
-    </ul>
+        <li className="nav-item">
+          <span className="nav-link">
+            <Link to="/bugs"> Bugs </Link>
+          </span>
+        </li>
+        <li className="nav-item">
+          <span className="nav-link">
+            <Link to="/tutor">Tutor </Link>
+          </span>
+        </li>
+
+        <li className="nav-item">
+          <span className="nav-link active" aria-current="page">
+            <Link to="/login">
+              {" "}
+              {!auth.user ? (
+                <span>Login</span>
+              ) : (
+                <span onClick={logout}>Logout</span>
+              )}{" "}
+            </Link>
+          </span>
+        </li>
+        {auth && auth.user && auth.user.credits && (
+          <li className="nav-item">
+            <span className="nav-link disabled credits">{auth.user?.credits}coins</span>
+          </li>
+        )}
+      </ul>
+    </header>
   );
 }
