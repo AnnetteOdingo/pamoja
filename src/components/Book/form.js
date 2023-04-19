@@ -59,16 +59,6 @@ export default function AddBook() {
           ref={editionRef}
           size="lg"
         />
-        <Input
-          type="file"
-          accept="image/*"
-          placeholder="Enter a photo of the book"
-          background="#fff"
-          border="2px solid #3AA5F3"
-          _placeholder={{ opacity: 1, color: "#000000" }}
-          size="lg"
-          onChange={handleImageUpload}
-        />
         <Textarea
           type="text"
           placeholder="Enter book description"
@@ -78,11 +68,22 @@ export default function AddBook() {
           ref={descriptionRef}
           size="lg"
         />
-        <Button
-          colorScheme={"blue"}
+
+        <label for="file">Upload photo:</label>
+        <Input
+          id="file"
+          type="file"
+          accept="image/*"
+          placeholder="Enter a photo of the book"
+          background="#fff"
+          border="2px solid #3AA5F3"
+          _placeholder={{ opacity: 1, color: "#000000" }}
           size="lg"
-          width={"fit-content"}
-        >
+          onChange={handleImageUpload}
+          paddingTop="6px"
+        />
+
+        <Button colorScheme={"blue"} size="lg" width={"fit-content"}>
           Add book
         </Button>
       </Stack>
