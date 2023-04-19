@@ -10,22 +10,22 @@ export default function Lesson() {
       borderBottom={"1px solid #7c7c7c"}
       className="borderBottomNo"
     >
-      <Flex alignItems={"flex-start"}>
-        <Box minWidth={"800px"} margin="auto">
+      <Flex alignItems={"center"} justifyContent={'space-between'}>
+        <Box>
           <Text
             minWidth={"150px"}
-            paddingX={"24px"}
+            // paddingX={"24px"}
             fontWeight={600}
             fontSize="18px"
             marginBottom={"8px"}
           >
             Data Structures
           </Text>
-          <Text paddingX={"24px"} marginBottom={"8px"}>
+          <Text marginBottom={"8px"}>
             I need some help with Graphs, I still don't understand breadth first
             search.
           </Text>
-          <Wrap paddingX={"24px"} marginBottom={"8px"}>
+          <Wrap  marginBottom={"8px"}>
             <WrapItem height="24px">
               <Text background="#D4F4DD" paddingX="18px">
                 Comp Science
@@ -47,7 +47,7 @@ export default function Lesson() {
           </Text>
         </Box>
       </Flex>
-      <Box width='800px' margin='0 auto'>
+      <Box>
         <Text
           marginBottom={0}
           onClick={() => setShowComments(!showComments)}
@@ -56,7 +56,7 @@ export default function Lesson() {
           _active={{ textDecoration: "underline" }}
           textDecoration="none"
           marginTop={"8px"}
-          paddingLeft='16px'
+          // paddingLeft="22px"
         >
           {!showComments ? "Chat" : "Close"}
         </Text>

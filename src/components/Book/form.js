@@ -3,7 +3,7 @@ import { Box, Text, Input, Button, Stack, Textarea } from "@chakra-ui/react";
 import axios from "../../axios";
 
 export default function AddBook() {
-  const [imageData, setImageData] = React.useState("");
+  const [imageData, setImageData] = useState("");
   const titleRef = useRef();
   const descriptionRef = useRef();
   const locationRef = useRef();
