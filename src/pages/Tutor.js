@@ -65,11 +65,11 @@ export default function Tutor() {
         borderRadius="20px"
         border="1px solid black"
       >
-        {lessons.map((lesson) => (
-          <Box key={lesson._id}>
-            <Lesson lesson={lesson} user={user}/>
-          </Box>
-        ))}
+        {lessons
+          .filter((lesson) => lesson.isTaught)
+          .map((lesson) => (
+            <Lesson key={lesson._id} lesson={lesson} user={user} />
+          ))}
       </Box>
     </Box>
   );
