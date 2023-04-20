@@ -121,7 +121,6 @@ export default function AddBook() {
         >
           Add book
         </Button>
-        <Image src={imageData} />
       </Stack>
     </Box>
   );
