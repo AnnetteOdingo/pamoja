@@ -6,8 +6,8 @@ export default function DocumentBug() {
   const courseRef = useRef();
   const titleRef = useRef();
   const descriptionRef = useRef();
-  // const base_url = "https://pamoja-backend.onrender.com/api";
-  const base_url = "http://localhost:5000/api";
+  const base_url = "https://pamoja-backend.onrender.com/api";
+  // const base_url = "http://localhost:5000/api";
   const submit = (event) => {
     event.preventDefault();
     axios()

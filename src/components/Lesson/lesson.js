@@ -5,8 +5,8 @@ import Comments from "../shared/Comments";
 import axios from "../../axios/index";
 export default function Lesson({ lesson, user }) {
   const [showComments, setShowComments] = React.useState(false);
-  // const base_url = `https://pamoja-backend.onrender.com/api`;
-  const base_url = `http://localhost:5000/api`;
+  const base_url = `https://pamoja-backend.onrender.com/api`;
+  // const base_url = `http://localhost:5000/api`;
   const commentsUrl = `${base_url}/lessons/${lesson._id}/comments`;
   const teachUrl = `${base_url}/lessons/teach/${lesson._id}`;
   const attendUrl = `${base_url}/lessons/attend/${lesson._id}`;
