@@ -1,0 +1,55 @@
+/* .App {
+  text-align: center;
+} */
+body{
+  background: #d6a7b1 !important;
+}
+
+header {
+  background: #fff;
+  padding: 10px;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+header div{
+  display: flex;
+  justify-content: flex-end;
+}
+header ul {
+  display: flex;
+  justify-content: space-around;
+  width: 800px;
+  background-color: #fff;
+}
+
+header ul li, .credits   {
+  font-weight: bold;
+  margin: 0 10px;
+  color: #7c7c7c;
+  font-size: 20px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  background-color: #fff;
+}
+header ul li span, header ul li a, header ul li span a span {
+  background-color: #fff;
+  color: #7c7c7c;
+}
+header ul li span, header ul li a .active{
+  background-color: #fff;
+  color: blue;
+}
+header ul li .credits, .credits  {
+  background-color: #fff;
+  color:  #FF69B4 !important;
+}
+.borderBottomNo:last-child {
+  border-bottom: none !important; /* remove the border from the last box */
+}
+header p{
+  /* margin: 0; */
+  line-height: 46px;
+}
+/* document.querySelector("#root > div > header > ul > li:nth-child(5) > span") */
