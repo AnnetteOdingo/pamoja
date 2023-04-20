@@ -2,8 +2,11 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 import React from "react";
 import Comments from "../shared/Comments";
 
-export default function Bug() {
+export default function Bug({bug}) {
   const [showComments, setShowComments] = React.useState(false);
+  // const base_url = `https://pamoja-backend.onrender.com/api`;
+  const base_url = `http://localhost:5000/api`;
+  const commentsUrl = `${base_url}/bugs/${bug._id}/comments`;
   return (
     <Box
       marginY="40px"
@@ -26,7 +29,7 @@ export default function Bug() {
         >
           Course
         </Text>
-        <Text marginBottom={0}>Life</Text>
+        <Text marginBottom={0}>{bug.course}</Text>
       </Flex>
       <Flex
         padding={"8px"}
@@ -42,7 +45,7 @@ export default function Bug() {
         >
           Bug
         </Text>
-        <Text marginBottom={0}>abcd</Text>
+        <Text marginBottom={0}>{bug.title}</Text>
       </Flex>
       <Flex
         padding={"8px"}
@@ -59,10 +62,7 @@ export default function Bug() {
           Description
         </Text>
         <Text marginBottom={0}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
+          {bug.description}
         </Text>
       </Flex>
       <Box>
@@ -95,11 +95,9 @@ export default function Bug() {
         </Flex>
         { showComments && <Box padding="20px 160px">
           <Comments
-            comments={[
-              "Pretium nibh ipsum consequat nisl vel pretium lectus quam id. Ut diam quam nulla porttitor massa id.",
-              "At risus viverra adipiscing at",
-            ]}
+            comments={ bug.comments}
             comment={'fix'}
+            url={commentsUrl}
           />
         </Box>
 }

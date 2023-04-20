@@ -6,7 +6,7 @@ import axios from "../../axios/index";
 export default function Comments({ comments, comment, url }) {
   const { user } = useAuth();
   const commentRef = useRef();
- 
+
   const submit = (event) => {
     event.preventDefault();
     axios()
@@ -32,9 +32,7 @@ export default function Comments({ comments, comment, url }) {
             marginBottom="18px"
           >
             <Box maxWidth="120px" textAlign={"center"}>
-              <Avatar
-                src={comment.userAvatar}
-              />
+              <Avatar src={comment.userAvatar} />
               <Text>{comment.username}</Text>
             </Box>
             <Text paddingLeft={"32px"} key={index}>
