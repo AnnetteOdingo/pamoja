@@ -30,6 +30,7 @@ export default function Comments({ comments, comment, url }) {
             justifyContent={"flex-start"}
             border="1px dashed #7c7c7c"
             marginBottom="18px"
+            key={index}
           >
             <Box maxWidth="120px" textAlign={"center"}>
               <Avatar src={comment.userAvatar} />
