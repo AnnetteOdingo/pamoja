@@ -110,7 +110,6 @@ export default function Book({ book, user }) {
       axios()
         .put(getUrl, {...book, purchaseId: user._id })
         .then((res) => {
-          debugger;
           alert("Waiting for seller");
         })
         .catch((error) => {
@@ -118,7 +117,6 @@ export default function Book({ book, user }) {
         });
     }
   };
-  console.log(book.photo, 'bp')
   return (
     
     <Box

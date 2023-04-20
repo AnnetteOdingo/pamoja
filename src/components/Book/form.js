@@ -21,7 +21,6 @@ export default function AddBook() {
       setImageData(e.target.result);
     };
   };
-  console.log("id", imageData);
   const submit = (event) => {
     event.preventDefault();
     axios()
