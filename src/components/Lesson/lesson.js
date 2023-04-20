@@ -11,7 +11,6 @@ export default function Lesson({ lesson, user }) {
   const teachUrl = `${base_url}/lessons/teach/${lesson._id}`;
   const attendUrl = `${base_url}/lessons/attend/${lesson._id}`;
   const startSession = () => {
-    debugger;
     if (lesson.user !== user._id) {
       axios()
         .put(teachUrl, { ...lesson, teachId: user._id })
@@ -19,7 +18,6 @@ export default function Lesson({ lesson, user }) {
           alert("Waiting for student to approve");
         })
         .catch((error) => {
-          debugger;
           alert(error.response.data.message);
         });
     } else {
@@ -36,6 +34,7 @@ export default function Lesson({ lesson, user }) {
       padding={"40px 60px"}
       borderBottom={"1px solid #7c7c7c"}
       className="borderBottomNo"
+      key={lesson._id}
     >
       <Flex alignItems={"center"} justifyContent={"space-between"}>
         <Box>
