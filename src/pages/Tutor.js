@@ -9,7 +9,7 @@ import LessonForm from "../components/Lesson/form";
 export default function Tutor() {
   const [showForm, setShowForm] = React.useState(false);
   const { user } = useAuth();
-  React.useEffect(() => {}, [showForm]);
+  // React.useEffect(() => {}, [showForm]);
   if (!user) {
     return;
   }

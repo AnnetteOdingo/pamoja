@@ -5,15 +5,25 @@ import PageIntro from "../components/shared/intro";
 import { useAuth } from "../contexts/AuthContext";
 import { IoMdAdd } from "react-icons/io";
 import AddBook from "../components/Book/form";
-
+import axios from "../axios/index";
 export default function Books() {
   const [showForm, setShowForm] = React.useState(false);
+  const [books, setBooks] = React.useState([]);
+  // const base_url = "https://pamoja-backend.onrender.com/api";
+  const base_url = 'http://localhost:5000/api';
   const { user } = useAuth();
-  React.useEffect(() => {}, [showForm]);
+  // React.useEffect(() => {}, [showForm]);
+  React.useEffect(() => {
+    axios()
+      .get(`${base_url}/books`)
+      .then((res) => {
+        setBooks(res.data);
+      })
+      .catch((error) => alert(error.response.data));
+  },[books, setBooks]);
   if (!user) {
     return;
   }
-
   return (
     <Box maxWidth={"1200px"} margin="0 auto">
       <Box
@@ -24,13 +34,10 @@ export default function Books() {
         background="#fff"
         borderRadius="20px"
       >
-        <PageIntro
-          user={user}
-          cost={"50"}
-        />{" "}
-        { !showForm && (
+        <PageIntro user={user} cost={"50"} />{" "}
+        {!showForm && (
           <Button
-            leftIcon={<IoMdAdd size='24px' />}
+            leftIcon={<IoMdAdd size="24px" />}
             colorScheme="blue"
             variant="outline"
             onClick={() => setShowForm(!showForm)}
@@ -49,8 +56,7 @@ export default function Books() {
         )}
         {showForm && <AddBook />}
       </Box>
-      <Book />
-      <Book />
+      {books.filter(book=> !book.isExchanged).map((book, index)=> <Box key={book._id}><Book  user={user} book={book}/></Box>)}
     </Box>
   );
 }

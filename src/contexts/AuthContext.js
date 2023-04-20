@@ -4,7 +4,8 @@ import axios from "../axios";
 
 let AuthContext = React.createContext(null);
 
-const base_url = "https://pamoja-backend.onrender.com/api";
+// const base_url = "https://pamoja-backend.onrender.com/api";
+const base_url = "http://localhost:5000/api";
 
 export function AuthProvider({ children }) {
   let [user, setUser] = React.useState(null);

@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import Comments from "../shared/Comments";
-
+import axios from "../../axios/index";
 const commonWords = [
   "the",
   "of",
@@ -64,8 +64,13 @@ const commonWords = [
   "and—their",
 ];
 
-export default function Book() {
+export default function Book({ book, user }) {
   const [showComments, setShowComments] = React.useState(false);
+  // const base_url = `https://pamoja-backend.onrender.com/api`;
+  const base_url = `http://localhost:5000/api`;
+  const commentsUrl = `${base_url}/books/${book._id}/comments`;
+  const giveUrl = `${base_url}/books/sell/${book._id}`;
+  const getUrl = `${base_url}/books/buy/${book._id}`;
   const getFirstWords = (str) => {
     const words = str.trim().split(/\s+/);
     return words.slice(0, 60).join(" ");
@@ -85,18 +90,37 @@ export default function Book() {
       return word;
     }
   };
-  const description =
-    "Ikigai reveals the secrets to their longevity and happiness: how they eat, how they move, how they work, how they foster collaboration and community, and—their best-kept secret—how they find the ikigai that brings satisfaction to their lives. And it provides practical tools to help you discover your own ikigai.Ikigai reveals the secrets to their longevity and happiness: how they eat, how they move, how they work, how they foster collaboration and community, and—their best-kept secret—how they find the ikigai that brings satisfaction to their lives. And it provides practical tools to help you discover your own ikigai.";
   const tags = [
     ...new Set(
-      description
+      book.description
         .split(" ")
         .filter((word) => !commonWords.includes(word.toLowerCase()))
         .slice(0, 16)
     ),
   ];
-
+  const exchangeBook = () => {
+    if (book.user === user._id) {
+      axios()
+        .put(giveUrl, { ...book, isExchanged: true })
+        .then((res) => {})
+        .catch((error) => {
+          alert(error.response.data.message);
+        });
+    } else {
+      axios()
+        .put(getUrl, {...book, purchaseId: user._id })
+        .then((res) => {
+          debugger;
+          alert("Waiting for seller");
+        })
+        .catch((error) => {
+          alert(error.response.data.message);
+        });
+    }
+  };
+  console.log(book.photo, 'bp')
   return (
+    
     <Box
       maxWidth={"1200px"}
       marginY="40px"
@@ -105,21 +129,21 @@ export default function Book() {
       padding="64px"
       borderRadius={"60px"}
     >
-      <Flex>
+      <Flex width='100%'>
         <Box height="360px" minWidth="300px">
           <Image
             height="100%"
             width="100%"
             objectFit=" contain"
-            src="https://m.media-amazon.com/images/I/41mtUoTi8ZL._SX351_BO1,204,203,200_.jpg"
+            src={ book.photo || "https://static.vecteezy.com/system/resources/previews/000/541/091/large_2x/green-book-on-white-background-vector.jpg"}
           />
         </Box>
 
-        <Box paddingX={"32px"}>
+        <Box paddingX={"32px"} width='calc(100% - 300px)'>
           <Box>
             <Flex justifyContent={"space-between"} marginBottom="16px">
               <Text fontWeight={600} fontSize="24px" alignSelf={"center"}>
-                Ikigai 1st Edition
+                {book.title} {book.edition} edition
               </Text>
               <Button
                 cursor={"pointer"}
@@ -135,21 +159,22 @@ export default function Book() {
                 }}
                 padding="26px"
                 borderRadius={"50%"}
+                onClick={exchangeBook}
               >
-                Get
+                {book.user === user._id ? "Give" : "Get"}
               </Button>
             </Flex>
             <Flex justifyContent={"space-between"}>
               <Text marginBottom={0} fontWeight={600} fontSize="18px">
-                Author
+                Autor
               </Text>
               <Text marginBottom={0} fontWeight={600} fontSize="18px">
-                Location
+                location
               </Text>
             </Flex>
             <Flex justifyContent={"space-between"}>
-              <Text marginBottom={"8px"}>Daudi</Text>
-              <Text marginBottom={"8px"}>Allendale</Text>
+              <Text marginBottom={"8px"}>{book.author}</Text>
+              <Text marginBottom={"8px"}> {book.location}</Text>
             </Flex>
           </Box>
           <Box>
@@ -157,9 +182,10 @@ export default function Book() {
               Description
             </Text>
             <Text marginBottom={"8px"}>
-              {description.length === getFirstWords(description).length
-                ? description
-                : `${removePunctuation(getFirstWords(description))}...`}
+              {book.description.length ===
+              getFirstWords(book.description).length
+                ? book.description
+                : `${removePunctuation(getFirstWords(book.description))}...`}
             </Text>
             {tags && (
               <Box>
@@ -169,8 +195,8 @@ export default function Book() {
                 <Wrap>
                   {tags.map((tag, index) => {
                     return (
-                      <WrapItem height="24px">
-                        <Text background="#D4F4DD" paddingX="18px" key={index}>
+                      <WrapItem height="24px" key={index}>
+                        <Text background="#D4F4DD" paddingX="18px">
                           {" "}
                           {removePunctuation(tag)}{" "}
                         </Text>
@@ -195,13 +221,9 @@ export default function Book() {
             Comments
           </Text>
           <Comments
-            comments={[
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-              "the book is new",
-              "the book is new",
-              "the book is new",
-            ]}
-            comment={'comment'}
+            comments={book.comments}
+            comment={"comment"}
+            url={commentsUrl}
           />
           <Flex justifyContent={"flex-end"} mt="8px">
             {" "}
@@ -216,7 +238,7 @@ export default function Book() {
           </Flex>
         </Box>
       ) : (
-        <Flex justifyContent={"flex-end"} mt='16px'>
+        <Flex justifyContent={"flex-end"} mt="16px">
           {" "}
           <Text
             onClick={() => setShowComments(!showComments)}

@@ -18,7 +18,8 @@ import { useAuth } from "../contexts/AuthContext";
 export default function LoginPage() {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const base_url = "https://pamoja-backend.onrender.com/api";
+  // const base_url = "https://pamoja-backend.onrender.com/api";
+  const base_url = 'http://localhost:5000/api'
   const { getUserProfile } = useAuth();
 
   const emailRef = useRef();
