@@ -4,8 +4,8 @@ import Comments from "../shared/Comments";
 
 export default function Bug({bug}) {
   const [showComments, setShowComments] = React.useState(false);
-  // const base_url = `https://pamoja-backend.onrender.com/api`;
-  const base_url = `http://localhost:5000/api`;
+  const base_url = `https://pamoja-backend.onrender.com/api`;
+  // const base_url = `http://localhost:5000/api`;
   const commentsUrl = `${base_url}/bugs/${bug._id}/comments`;
   return (
     <Box

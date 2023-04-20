@@ -66,8 +66,8 @@ const commonWords = [
 
 export default function Book({ book, user }) {
   const [showComments, setShowComments] = React.useState(false);
-  // const base_url = `https://pamoja-backend.onrender.com/api`;
-  const base_url = `http://localhost:5000/api`;
+  const base_url = `https://pamoja-backend.onrender.com/api`;
+  // const base_url = `http://localhost:5000/api`;
   const commentsUrl = `${base_url}/books/${book._id}/comments`;
   const giveUrl = `${base_url}/books/sell/${book._id}`;
   const getUrl = `${base_url}/books/buy/${book._id}`;
