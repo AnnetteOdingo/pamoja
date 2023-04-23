@@ -66,7 +66,7 @@ export default function Tutor() {
         border="1px solid black"
       >
         {lessons
-          .filter((lesson) => lesson.isTaught)
+          .filter((lesson) => !lesson.isTaught)
           .map((lesson) => (
             <Lesson key={lesson._id} lesson={lesson} user={user} />
           ))}
