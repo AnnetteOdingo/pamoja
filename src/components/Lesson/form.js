@@ -8,9 +8,9 @@ export default function LessonForm(){
     const descriptionRef = useRef();
      const base_url = "https://pamoja-backend.onrender.com/api";
   // const base_url = "http://localhost:5000/api";
-  const submit = (event) => {
+  const submit = async (event) => {
     event.preventDefault();
-    axios()
+   await  axios()
       .post(`${base_url}/lessons`, {
         topic: topicRef.current.value,
         course: courseRef.current.value,

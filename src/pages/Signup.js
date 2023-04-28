@@ -48,9 +48,9 @@ export default function SignUpPage() {
       });
     setTimeout(() => {
       navigate("/");
-      nameRef.current.value = "";
-      passwordRef.current.value = "";
-      emailRef.current.value = "";
+      // nameRef.current.value = "";
+      // passwordRef.current.value = "";
+      // emailRef.current.value = "";
       setIsLoading(false);
     }, 2000);
   };

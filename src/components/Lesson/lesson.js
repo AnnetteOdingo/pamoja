@@ -10,9 +10,9 @@ export default function Lesson({ lesson, user }) {
   const commentsUrl = `${base_url}/lessons/${lesson._id}/comments`;
   const teachUrl = `${base_url}/lessons/teach/${lesson._id}`;
   const attendUrl = `${base_url}/lessons/attend/${lesson._id}`;
-  const startSession = () => {
+  const startSession = async() => {
     if (lesson.user !== user._id) {
-      axios()
+      await axios()
         .put(teachUrl, { ...lesson, teachId: user._id })
         .then((res) => {
           alert("Waiting for student to approve");
@@ -21,7 +21,7 @@ export default function Lesson({ lesson, user }) {
           alert(error.response.data.message);
         });
     } else {
-      axios()
+      await axios()
         .put(attendUrl, { ...lesson, isTaught: true })
         .then((res) => {})
         .catch((error) => {

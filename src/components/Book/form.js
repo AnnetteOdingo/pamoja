@@ -1,5 +1,13 @@
 import React, { useRef, useState } from "react";
-import { Box, Text, Input, Button, Stack, Textarea, Image } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Input,
+  Button,
+  Stack,
+  Textarea,
+  Image,
+} from "@chakra-ui/react";
 import axios from "../../axios/index";
 
 export default function AddBook() {
@@ -21,14 +29,16 @@ export default function AddBook() {
       setImageData(e.target.result);
     };
   };
-  const submit = (event) => {
+  const submit = async (event) => {
     event.preventDefault();
-    axios()
+    await axios()
       .post(`${base_url}/books`, {
         title: titleRef.current.value,
         description: descriptionRef.current.value,
         location: locationRef.current.value,
-        photo: !imageData ? "https://static.vecteezy.com/system/resources/previews/000/541/091/large_2x/green-book-on-white-background-vector.jpg" : imageData,
+        photo: !imageData
+          ? "https://static.vecteezy.com/system/resources/previews/000/541/091/large_2x/green-book-on-white-background-vector.jpg"
+          : imageData,
         author: authorRef.current.value,
         edition: editionRef.value ? editionRef.current.value : "1st",
       })

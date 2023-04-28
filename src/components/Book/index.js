@@ -98,16 +98,16 @@ export default function Book({ book, user }) {
         .slice(0, 16)
     ),
   ];
-  const exchangeBook = () => {
+  const exchangeBook = async () => {
     if (book.user === user._id) {
-      axios()
+      await axios()
         .put(giveUrl, { ...book, isExchanged: true })
         .then((res) => {})
         .catch((error) => {
           alert(error.response.data.message);
         });
     } else {
-      axios()
+      await axios()
         .put(getUrl, {...book, purchaseId: user._id })
         .then((res) => {
           alert("Waiting for seller");
@@ -159,7 +159,7 @@ export default function Book({ book, user }) {
                 borderRadius={"50%"}
                 onClick={exchangeBook}
               >
-                {book.user === user._id ? "Give" : "Get"}
+                {book.user === user.id ? "Give" : "Get"}
               </Button>
             </Flex>
             <Flex justifyContent={"space-between"}>

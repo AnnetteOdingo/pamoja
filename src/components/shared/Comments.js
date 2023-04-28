@@ -1,4 +1,4 @@
-import { Avatar, Box, Text, Flex, Textarea, Button } from "@chakra-ui/react";
+import { View, Text, TextInput, TouchableOpacity, FlatList } from 'react-native';
 import React, { useRef } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import axios from "../../axios/index";
@@ -7,9 +7,9 @@ export default function Comments({ comments, comment, url }) {
   const { user } = useAuth();
   const commentRef = useRef();
 
-  const submit = (event) => {
+  const submit = async (event) => {
     event.preventDefault();
-    axios()
+    await axios()
       .put(`${url}`, {
         comment: commentRef.current.value,
         userId: user._id,
@@ -22,31 +22,44 @@ export default function Comments({ comments, comment, url }) {
       });
   };
   return (
-    <Box>
-      {comments.map((comment, index) => {
-        return (
-          <Flex
-            padding="16px"
-            justifyContent={"flex-start"}
-            border="1px dashed #7c7c7c"
-            marginBottom="18px"
+    <View>
+      <FlatList
+        data={comments}
+        renderItem={({ item, index }) => (
+          <View
+            style={{
+              padding: 16,
+              justifyContent: "flex-start",
+              borderWidth: 1,
+              borderColor: "#7c7c7c",
+              marginBottom: 18,
+            }}
             key={index}
           >
-            <Box maxWidth="120px" textAlign={"center"}>
-              <Avatar src={comment.userAvatar} />
-              <Text>{comment.username}</Text>
-            </Box>
-            <Text paddingLeft={"32px"} key={index}>
-              {comment.comment}{" "}
-            </Text>
-          </Flex>
-        );
-      })}
-      <Textarea placeholder={`Add a ${comment}...`} ref={commentRef} />
+            <View style={{ maxWidth: 120, textAlign: "center" }}>
+              {/* <Avatar source={{ uri: item.userAvatar }} /> */}
+              <Text>{item.username}</Text>
+            </View>
+            <Text style={{ paddingLeft: 32 }}>{item.comment}</Text>
+          </View>
+        )}
+        keyExtractor={(item, index) => index.toString()}
+      />
 
-      <Button mt="28px" height={"54px"} colorScheme={"blue"} onClick={submit}>
-        Submit
-      </Button>
-    </Box>
+      <TextInput placeholder={`Add a ${comment}...`} ref={commentRef} />
+
+      <TouchableOpacity
+        style={{
+          marginTop: 28,
+          height: 54,
+          backgroundColor: "blue",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+        onPress={submit}
+      >
+        <Text style={{ color: "white" }}>Submit</Text>
+      </TouchableOpacity>
+    </View>
   );
 }
